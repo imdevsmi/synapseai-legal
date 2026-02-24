@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SynapseAI – Support</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0A0C14;
+            --surface: #12141F;
+            --border: rgba(255,255,255,0.07);
+            --accent: #6C63FF;
+            --accent-soft: rgba(108,99,255,0.12);
+            --text: #E8E8F0;
+            --text-muted: #7A7A9A;
+            --text-dim: #4A4A6A;
+            --radius: 16px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.8; min-height: 100vh; }
+        body::before { content: ''; position: fixed; top: -200px; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse, rgba(108,99,255,0.12) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+        nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: rgba(10,12,20,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .nav-logo { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--text); text-decoration: none; letter-spacing: 0.02em; }
+        .nav-links { display: flex; gap: 8px; align-items: center; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 20px; transition: all 0.2s; }
+        .nav-links a:hover { color: var(--text); background: var(--border); }
+        .nav-links a.active { color: var(--text); background: var(--accent-soft); }
+        .lang-switcher { display: flex; gap: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 3px; }
+        .lang-btn { background: none; border: none; color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 16px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.05em; }
+        .lang-btn:hover { color: var(--text); }
+        .lang-btn.active { background: var(--accent); color: #fff; }
+        main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 60px 24px 100px; }
+        .page-header { margin-bottom: 56px; opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s ease forwards; }
+        .page-tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); padding: 5px 12px; border-radius: 20px; margin-bottom: 20px; }
+        h1 { font-family: 'DM Serif Display', serif; font-size: clamp(36px, 5vw, 52px); font-weight: 400; line-height: 1.15; color: var(--text); margin-bottom: 16px; }
+        .subtitle { font-size: 17px; color: var(--text-muted); max-width: 520px; }
+        .section { margin-bottom: 56px; opacity: 0; transform: translateY(16px); animation: fadeUp 0.5s ease forwards; }
+        .section:nth-child(1) { animation-delay: 0.1s; } .section:nth-child(2) { animation-delay: 0.15s; } .section:nth-child(3) { animation-delay: 0.2s; } .section:nth-child(4) { animation-delay: 0.25s; }
+        h2 { font-family: 'DM Serif Display', serif; font-size: 22px; font-weight: 400; color: var(--text); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+        p { color: var(--text-muted); margin-bottom: 12px; font-size: 15px; }
+
+        /* Contact cards */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+        .contact-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; transition: border-color 0.2s, transform 0.2s; }
+        .contact-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .contact-card .icon { font-size: 28px; margin-bottom: 12px; }
+        .contact-card h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+        .contact-card p { font-size: 13px; margin-bottom: 16px; }
+        .contact-card a { display: inline-block; background: var(--accent-soft); color: var(--accent); font-size: 13px; font-weight: 500; padding: 8px 16px; border-radius: 20px; text-decoration: none; transition: background 0.2s; }
+        .contact-card a:hover { background: var(--accent); color: #fff; }
+
+        /* FAQ */
+        .faq-item { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; cursor: pointer; user-select: none; transition: background 0.2s; }
+        .faq-question:hover { background: var(--surface); }
+        .faq-question span { font-size: 15px; font-weight: 500; color: var(--text); }
+        .faq-chevron { color: var(--text-muted); font-size: 18px; transition: transform 0.3s; }
+        .faq-item.open .faq-chevron { transform: rotate(180deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.2s; }
+        .faq-item.open .faq-answer { max-height: 300px; }
+        .faq-answer p { padding: 0 24px 20px; margin: 0; font-size: 14px; color: var(--text-muted); }
+
+        /* Response time */
+        .response-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; display: flex; align-items: center; gap: 16px; }
+        .response-box .dot { width: 10px; height: 10px; background: #34C759; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 8px rgba(52,199,89,0.5); }
+        .response-box p { margin: 0; font-size: 14px; }
+
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--text); font-weight: 500; }
+        footer { position: relative; z-index: 1; text-align: center; padding: 32px 24px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 13px; }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 640px) { nav { padding: 12px 20px; } .nav-links { display: none; } main { padding: 40px 20px 80px; } .contact-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="nav-logo">SynapseAI</a>
+    <div class="nav-links">
+        <a href="privacy-policy.html" data-key="nav_privacy">Privacy Policy</a>
+        <a href="terms-of-use.html" data-key="nav_terms">Terms of Use</a>
+        <a href="support.html" class="active" data-key="nav_support">Support</a>
+    </div>
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('tr')">TR</button>
+        <button class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+</nav>
+
+<main>
+    <div class="page-header">
+        <span class="page-tag" data-key="tag">Help Center</span>
+        <h1 data-key="title">Support</h1>
+        <p class="subtitle" data-key="subtitle">Have a question or issue? We're here to help.</p>
+    </div>
+
+    <div class="section">
+        <h2 data-key="contact_title">Get in Touch</h2>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="icon">✉️</div>
+                <h3 data-key="email_title">Email Support</h3>
+                <p data-key="email_desc">For general questions, feedback, or account issues.</p>
+                <a href="mailto:gundogannsami@gmail.com">gundogannsami@gmail.com</a>
+            </div>
+            <div class="contact-card">
+                <div class="icon">🔒</div>
+                <h3 data-key="privacy_title">Privacy Inquiries</h3>
+                <p data-key="privacy_desc">For data requests, deletion, or GDPR-related questions.</p>
+                <a href="mailto:gundogannsami@gmail.com">gundogannsami@gmail.com</a>
+            </div>
+        </div>
+        <div class="response-box">
+            <div class="dot"></div>
+            <p data-key="response_time">We typically respond within <strong>24–48 hours</strong> on business days.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 data-key="faq_title">Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span data-key="faq1_q">How do I cancel my subscription?</span>
+                <span class="faq-chevron">›</span>
+            </div>
+            <div class="faq-answer">
+                <p data-key="faq1_a">Subscriptions are managed through the Apple App Store. Go to iPhone Settings → Apple ID → Subscriptions → SynapseAI → Cancel Subscription. Cancellation takes effect at the end of the current billing period.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span data-key="faq2_q">How does the 7-day free trial work?</span>
+                <span class="faq-chevron">›</span>
+            </div>
+            <div class="faq-answer">
+                <p data-key="faq2_a">New subscribers get full access to all premium features for 7 days at no charge. If you cancel before the trial ends, you will not be charged. The trial is available once per Apple ID.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span data-key="faq3_q">How do I request a refund?</span>
+                <span class="faq-chevron">›</span>
+            </div>
+            <div class="faq-answer">
+                <p data-key="faq3_a">Refunds are handled by Apple. Visit <a href="https://reportaproblem.apple.com" target="_blank">reportaproblem.apple.com</a>, sign in with your Apple ID, find your SynapseAI purchase, and select "Request a Refund".</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span data-key="faq4_q">Can my friends see my personal data?</span>
+                <span class="faq-chevron">›</span>
+            </div>
+            <div class="faq-answer">
+                <p data-key="faq4_a">No. The only information visible to your approved friends is your name and whether you are currently in a "Focused" session. No goals, notes, or any other personal data is shared.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span data-key="faq5_q">How do I delete my account?</span>
+                <span class="faq-chevron">›</span>
+            </div>
+            <div class="faq-answer">
+                <p data-key="faq5_a">Go to Profile → scroll to the bottom → Delete Account. This will permanently delete your account and all associated data from our servers. This action cannot be undone.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span data-key="faq6_q">Is my data stored on your servers?</span>
+                <span class="faq-chevron">›</span>
+            </div>
+            <div class="faq-answer">
+                <p data-key="faq6_a">Only your email address is stored on our servers (Firebase). Your display name and profile photo are stored locally on your device only and never uploaded to any server.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span data-key="faq7_q">The app is not working correctly. What should I do?</span>
+                <span class="faq-chevron">›</span>
+            </div>
+            <div class="faq-answer">
+                <p data-key="faq7_a">First, try closing and reopening the app. If the issue persists, try signing out and back in. Make sure your app is updated to the latest version. If the problem continues, contact us at <a href="mailto:gundogannsami@gmail.com">gundogannsami@gmail.com</a> with a description of the issue and your device model.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 data-key="other_title">Other Resources</h2>
+        <p data-key="other_p1">For legal inquiries, please review our <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-of-use.html">Terms of Use</a>. For subscription billing issues, please contact <a href="https://support.apple.com" target="_blank">Apple Support</a> directly as all payments are handled through the App Store.</p>
+    </div>
+</main>
+
+<footer>
+    <p>© 2026 SynapseAI · Sami Gündoğan · <a href="privacy-policy.html" data-key="nav_privacy">Privacy Policy</a> · <a href="terms-of-use.html" data-key="nav_terms">Terms of Use</a> · <a href="support.html" data-key="nav_support">Support</a></p>
+</footer>
+
+<script>
+function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+}
+
+const translations = {
+    en: {
+        tag: "Help Center", title: "Support", subtitle: "Have a question or issue? We're here to help.",
+        nav_privacy: "Privacy Policy", nav_terms: "Terms of Use", nav_support: "Support",
+        contact_title: "Get in Touch",
+        email_title: "Email Support", email_desc: "For general questions, feedback, or account issues.",
+        privacy_title: "Privacy Inquiries", privacy_desc: "For data requests, deletion, or GDPR-related questions.",
+        response_time: "We typically respond within <strong>24–48 hours</strong> on business days.",
+        faq_title: "Frequently Asked Questions",
+        faq1_q: "How do I cancel my subscription?",
+        faq1_a: "Subscriptions are managed through the Apple App Store. Go to iPhone Settings → Apple ID → Subscriptions → SynapseAI → Cancel Subscription. Cancellation takes effect at the end of the current billing period.",
+        faq2_q: "How does the 7-day free trial work?",
+        faq2_a: "New subscribers get full access to all premium features for 7 days at no charge. If you cancel before the trial ends, you will not be charged. The trial is available once per Apple ID.",
+        faq3_q: "How do I request a refund?",
+        faq3_a: "Refunds are handled by Apple. Visit <a href=\"https://reportaproblem.apple.com\" target=\"_blank\">reportaproblem.apple.com</a>, sign in with your Apple ID, find your SynapseAI purchase, and select \"Request a Refund\".",
+        faq4_q: "Can my friends see my personal data?",
+        faq4_a: "No. The only information visible to your approved friends is your name and whether you are currently in a \"Focused\" session. No goals, notes, or any other personal data is shared.",
+        faq5_q: "How do I delete my account?",
+        faq5_a: "Go to Profile → scroll to the bottom → Delete Account. This will permanently delete your account and all associated data from our servers. This action cannot be undone.",
+        faq6_q: "Is my data stored on your servers?",
+        faq6_a: "Only your email address is stored on our servers (Firebase). Your display name and profile photo are stored locally on your device only and never uploaded to any server.",
+        faq7_q: "The app is not working correctly. What should I do?",
+        faq7_a: "First, try closing and reopening the app. If the issue persists, try signing out and back in. Make sure your app is updated to the latest version. If the problem continues, contact us at <a href=\"mailto:gundogannsami@gmail.com\">gundogannsami@gmail.com</a> with a description of the issue and your device model.",
+        other_title: "Other Resources",
+        other_p1: "For legal inquiries, please review our <a href=\"privacy-policy.html\">Privacy Policy</a> and <a href=\"terms-of-use.html\">Terms of Use</a>. For subscription billing issues, please contact <a href=\"https://support.apple.com\" target=\"_blank\">Apple Support</a> directly as all payments are handled through the App Store.",
+    },
+    tr: {
+        tag: "Yardım Merkezi", title: "Destek", subtitle: "Bir sorunuz ya da sorununuz mu var? Yardımcı olmak için buradayız.",
+        nav_privacy: "Gizlilik Politikası", nav_terms: "Kullanım Koşulları", nav_support: "Destek",
+        contact_title: "Bizimle İletişime Geçin",
+        email_title: "E-posta Desteği", email_desc: "Genel sorular, geri bildirim veya hesap sorunları için.",
+        privacy_title: "Gizlilik Soruları", privacy_desc: "Veri talepleri, silme veya GDPR ile ilgili sorular için.",
+        response_time: "İş günlerinde genellikle <strong>24–48 saat</strong> içinde yanıt veriyoruz.",
+        faq_title: "Sıkça Sorulan Sorular",
+        faq1_q: "Aboneliğimi nasıl iptal edebilirim?",
+        faq1_a: "Abonelikler Apple App Store üzerinden yönetilir. iPhone Ayarları → Apple ID → Abonelikler → SynapseAI → Aboneliği İptal Et yolunu izleyin. İptal, mevcut fatura dönemi sonunda geçerli olur.",
+        faq2_q: "7 günlük ücretsiz deneme nasıl çalışır?",
+        faq2_a: "Yeni aboneler 7 gün boyunca tüm premium özelliklere ücretsiz olarak erişir. Deneme süresi sona ermeden iptal ederseniz ücret alınmaz. Deneme her Apple ID için bir kez kullanılabilir.",
+        faq3_q: "İade talebinde nasıl bulunabilirim?",
+        faq3_a: "İadeler Apple tarafından işlenir. <a href=\"https://reportaproblem.apple.com\" target=\"_blank\">reportaproblem.apple.com</a> adresini ziyaret edin, Apple ID'nizle giriş yapın, SynapseAI satın alımınızı bulun ve \"İade Talep Et\" seçeneğini seçin.",
+        faq4_q: "Arkadaşlarım kişisel verilerimi görebilir mi?",
+        faq4_a: "Hayır. Onaylı arkadaşlarınızın görebileceği tek bilgi adınız ve şu anda \"Odaklanıyor\" oturumunda olup olmadığınızdır. Hiçbir hedef, not veya başka kişisel veri paylaşılmaz.",
+        faq5_q: "Hesabımı nasıl silebilirim?",
+        faq5_a: "Profil → sayfanın en altına kaydırın → Hesabı Sil. Bu işlem hesabınızı ve sunucularımızdaki tüm ilgili verileri kalıcı olarak siler. Bu işlem geri alınamaz.",
+        faq6_q: "Verilerim sunucularınızda saklanıyor mu?",
+        faq6_a: "Yalnızca e-posta adresiniz sunucularımızda (Firebase) saklanır. Görünen adınız ve profil fotoğrafınız yalnızca cihazınızda yerel olarak saklanır ve hiçbir sunucuya yüklenmez.",
+        faq7_q: "Uygulama düzgün çalışmıyor. Ne yapmalıyım?",
+        faq7_a: "Önce uygulamayı kapatıp yeniden açmayı deneyin. Sorun devam ederse çıkış yapıp tekrar giriş yapmayı deneyin. Uygulamanın en son sürüme güncellendiğinden emin olun. Sorun devam ederse <a href=\"mailto:gundogannsami@gmail.com\">gundogannsami@gmail.com</a> adresine sorunun açıklaması ve cihaz modelinizle birlikte ulaşın.",
+        other_title: "Diğer Kaynaklar",
+        other_p1: "Hukuki sorular için lütfen <a href=\"privacy-policy.html\">Gizlilik Politikamızı</a> ve <a href=\"terms-of-use.html\">Kullanım Koşullarımızı</a> inceleyin. Abonelik fatura sorunları için tüm ödemeler App Store üzerinden işlendiğinden lütfen doğrudan <a href=\"https://support.apple.com\" target=\"_blank\">Apple Destek</a> ile iletişime geçin.",
+    },
+    es: {
+        tag: "Centro de Ayuda", title: "Soporte", subtitle: "¿Tiene una pregunta o problema? Estamos aquí para ayudar.",
+        nav_privacy: "Política de Privacidad", nav_terms: "Términos de Uso", nav_support: "Soporte",
+        contact_title: "Contáctenos",
+        email_title: "Soporte por Email", email_desc: "Para preguntas generales, comentarios o problemas de cuenta.",
+        privacy_title: "Consultas de Privacidad", privacy_desc: "Para solicitudes de datos, eliminación o preguntas relacionadas con el RGPD.",
+        response_time: "Normalmente respondemos en <strong>24–48 horas</strong> en días hábiles.",
+        faq_title: "Preguntas Frecuentes",
+        faq1_q: "¿Cómo cancelo mi suscripción?",
+        faq1_a: "Las suscripciones se gestionan a través de la App Store de Apple. Vaya a Configuración de iPhone → Apple ID → Suscripciones → SynapseAI → Cancelar suscripción. La cancelación tiene efecto al final del período de facturación actual.",
+        faq2_q: "¿Cómo funciona la prueba gratuita de 7 días?",
+        faq2_a: "Los nuevos suscriptores obtienen acceso completo a todas las funciones premium durante 7 días sin cargo. Si cancela antes de que termine la prueba, no se le cobrará. La prueba está disponible una vez por Apple ID.",
+        faq3_q: "¿Cómo solicito un reembolso?",
+        faq3_a: "Los reembolsos son gestionados por Apple. Visite <a href=\"https://reportaproblem.apple.com\" target=\"_blank\">reportaproblem.apple.com</a>, inicie sesión con su Apple ID, encuentre su compra de SynapseAI y seleccione \"Solicitar un reembolso\".",
+        faq4_q: "¿Pueden mis amigos ver mis datos personales?",
+        faq4_a: "No. La única información visible para sus amigos aprobados es su nombre y si actualmente está en una sesión \"Enfocado\". No se comparten objetivos, notas ni ningún otro dato personal.",
+        faq5_q: "¿Cómo elimino mi cuenta?",
+        faq5_a: "Vaya a Perfil → desplácese hacia abajo → Eliminar cuenta. Esto eliminará permanentemente su cuenta y todos los datos asociados de nuestros servidores. Esta acción no se puede deshacer.",
+        faq6_q: "¿Mis datos están almacenados en sus servidores?",
+        faq6_a: "Solo su dirección de correo electrónico se almacena en nuestros servidores (Firebase). Su nombre de visualización y foto de perfil se almacenan localmente solo en su dispositivo y nunca se cargan en ningún servidor.",
+        faq7_q: "La aplicación no funciona correctamente. ¿Qué debo hacer?",
+        faq7_a: "Primero, intente cerrar y volver a abrir la aplicación. Si el problema persiste, intente cerrar sesión y volver a iniciarla. Asegúrese de que su aplicación esté actualizada a la última versión. Si el problema continúa, contáctenos en <a href=\"mailto:gundogannsami@gmail.com\">gundogannsami@gmail.com</a> con una descripción del problema y el modelo de su dispositivo.",
+        other_title: "Otros Recursos",
+        other_p1: "Para consultas legales, revise nuestra <a href=\"privacy-policy.html\">Política de Privacidad</a> y nuestros <a href=\"terms-of-use.html\">Términos de Uso</a>. Para problemas de facturación de suscripción, comuníquese directamente con <a href=\"https://support.apple.com\" target=\"_blank\">Soporte de Apple</a>, ya que todos los pagos se procesan a través de la App Store.",
+    }
+};
+
+let currentLang = 'en';
+function setLang(lang) {
+    currentLang = lang;
+    const t = translations[lang];
+    document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+    });
+    document.documentElement.lang = lang;
+}
+const browserLang = navigator.language.slice(0, 2);
+if (['tr', 'es'].includes(browserLang)) setLang(browserLang);
+</script>
+</body>
+</html>
