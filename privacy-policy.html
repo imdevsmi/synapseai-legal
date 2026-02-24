@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SynapseAI – Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0A0C14;
+            --surface: #12141F;
+            --border: rgba(255,255,255,0.07);
+            --accent: #6C63FF;
+            --accent-soft: rgba(108,99,255,0.12);
+            --text: #E8E8F0;
+            --text-muted: #7A7A9A;
+            --text-dim: #4A4A6A;
+            --radius: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        /* Background mesh */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 600px;
+            background: radial-gradient(ellipse, rgba(108,99,255,0.12) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 40px;
+            background: rgba(10,12,20,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 20px;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 20px;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); background: var(--border); }
+        .nav-links a.active { color: var(--text); background: var(--accent-soft); }
+
+        /* Language switcher */
+        .lang-switcher {
+            display: flex;
+            gap: 4px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.05em;
+        }
+
+        .lang-btn:hover { color: var(--text); }
+        .lang-btn.active {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 60px 24px 100px;
+        }
+
+        .page-header {
+            margin-bottom: 56px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .page-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(36px, 5vw, 52px);
+            font-weight: 400;
+            line-height: 1.15;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .last-updated {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 48px;
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeUp 0.5s ease forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.15s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.25s; }
+        .section:nth-child(5) { animation-delay: 0.3s; }
+        .section:nth-child(6) { animation-delay: 0.35s; }
+        .section:nth-child(7) { animation-delay: 0.4s; }
+        .section:nth-child(8) { animation-delay: 0.45s; }
+        .section:nth-child(9) { animation-delay: 0.5s; }
+        .section:nth-child(10) { animation-delay: 0.55s; }
+        .section:nth-child(11) { animation-delay: 0.6s; }
+        .section:nth-child(12) { animation-delay: 0.65s; }
+
+        h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 22px;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        p { color: var(--text-muted); margin-bottom: 12px; font-size: 15px; }
+        p:last-child { margin-bottom: 0; }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0;
+        }
+
+        ul li {
+            color: var(--text-muted);
+            font-size: 15px;
+            padding: 6px 0 6px 20px;
+            position: relative;
+        }
+
+        ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 12px;
+        }
+
+        .highlight-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin: 16px 0;
+        }
+
+        .highlight-box p { margin: 0; font-size: 14px; }
+
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        strong { color: var(--text); font-weight: 500; }
+
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 32px 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 13px;
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 640px) {
+            nav { padding: 12px 20px; }
+            .nav-links { display: none; }
+            main { padding: 40px 20px 80px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="nav-logo">SynapseAI</a>
+    <div class="nav-links">
+        <a href="privacy-policy.html" class="active" data-key="nav_privacy">Privacy Policy</a>
+        <a href="terms-of-use.html" data-key="nav_terms">Terms of Use</a>
+        <a href="support.html" data-key="nav_support">Support</a>
+    </div>
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('tr')">TR</button>
+        <button class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+</nav>
+
+<main>
+    <div class="page-header">
+        <span class="page-tag" data-key="tag">Legal</span>
+        <h1 data-key="title">Privacy Policy</h1>
+        <p class="last-updated" data-key="updated">Last updated: February 24, 2026</p>
+    </div>
+
+    <div class="section">
+        <h2 data-key="s1_title">1. Introduction</h2>
+        <p data-key="s1_p1">Welcome to <strong>SynapseAI</strong>, an AI-powered education coach and mentor app designed to help students, professionals, and anyone who wants to build consistent habits in daily life. This Privacy Policy explains how Sami Gündoğan ("I", "me", or "Developer") collects, uses, and protects your personal information when you use the SynapseAI mobile application.</p>
+        <p data-key="s1_p2">By using SynapseAI, you agree to the collection and use of information in accordance with this policy. I am committed to protecting your privacy and handling your data transparently and responsibly.</p>
+    </div>
+
+    <div class="section">
+        <h2 data-key="s2_title">2. Information I Collect</h2>
+        <p data-key="s2_intro">I collect the minimum amount of data necessary to provide you with a great experience:</p>
+        <ul>
+            <li data-key="s2_l1"><strong>Email address</strong> — collected during account registration, stored securely on Firebase servers.</li>
+            <li data-key="s2_l2"><strong>Display name</strong> — optionally provided by you, stored only on your device (not uploaded to any server).</li>
+            <li data-key="s2_l3"><strong>Profile photo</strong> — optionally provided by you, stored only on your device (not uploaded to any server).</li>
+            <li data-key="s2_l4"><strong>Focus status</strong> — when you start a focus session, your "Focused" status becomes visible to your approved friends within the app. No session content, duration, or details are shared.</li>
+            <li data-key="s2_l5"><strong>Usage data</strong> — anonymized analytics to improve app performance, collected via Firebase Analytics.</li>
+            <li data-key="s2_l6"><strong>Device Permissions</strong> — We may request access to your photo library/camera (strictly to let you choose a profile photo, which stays on your device) and push notifications (to send focus reminders and app updates). You can revoke these at any time in your device settings.</li>
+        </ul>
+        <div class="highlight-box">
+            <p data-key="s2_note">⚡ Your name and profile photo never leave your device. They are stored locally using iOS UserDefaults and are not transmitted to our servers.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 data-key="s3_title">3. AI & Data Processing</h2>
+        <p data-key="s3_p1">As an AI-powered application, SynapseAI utilizes third-party artificial intelligence services to provide personalized coaching and mentoring. The text prompts, goals, and interactions you have with the AI within the app are sent to these services solely for the purpose of generating responses.</p>
+        <div class="highlight-box">
+            <p data-key="s3_note">🔒 <strong>Privacy First:</strong> Your personal data, interactions, and prompts are <strong>not</strong> used to train our AI models or the foundational models of our third-party AI providers.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 data-key="s4_title">4. How I Use Your Information</h2>
+        <p data-key="s4_intro">Your information is used solely to:</p>
+        <ul>
+            <li data-key="s4_l1">Create and manage your SynapseAI account</li>
+            <li data-key="s4_l2">Enable social features (Crew/friend system) — only your focus status is visible to friends</li>
+            <li data-key="s4_l3">Process subscription payments via RevenueCat</li>
+            <li data-key="s4_l4">Display relevant advertisements via Google AdMob (for free-tier users)</li>
+            <li data-key="s4_l5">Improve app performance and fix issues through analytics</li>
+            <li data-key="s4_l6">Send important notifications about your account or subscription</li>
+        </ul>
+        <p data-key="s4_p2">I do <strong>not</strong> sell, rent, or trade your personal information to third parties for marketing purposes.</p>
+    </div>
+
+    <div class="section">
+        <h2 data-key="s5_title">5. Third-Party Services</h2>
+        <p data-key="s5_intro">SynapseAI uses the following third-party services, each with their own privacy policies:</p>
+        <ul>
+            <li data-key="s5_l1"><strong>Firebase (Google)</strong> — Authentication, database, and analytics. <a href="https://firebase.google.com/support/privacy" target="_blank">Privacy Policy →</a></li>
+            <li data-key="s5_l2"><strong>OpenAI</strong> — Artificial Intelligence API for coaching features. <a href="https://openai.com/policies/privacy-policy" target="_blank">Privacy Policy →</a></li>
+            <li data-key="s5_l3"><strong>RevenueCat</strong> — Subscription management and in-app purchases. <a href="https://www.revenuecat.com/privacy" target="_blank">Privacy Policy →</a></li>
+            <li data-key="s5_l4"><strong>Google AdMob</strong> — Advertising for free-tier users. AdMob may collect device identifiers and usage data to serve personalized ads. <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy →</a></li>
+        </ul>
+        <div class="highlight-box">
+            <p data-key="s5_note">Premium subscribers do not see advertisements. AdMob data collection applies only to free-tier users.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 data-key="s6_title">6. Social Features & Friend System</h2>
+        <p data-key="s6_p1">SynapseAI includes a "Crew" (friend) feature that allows you to connect with other users. Here is exactly what is and is not shared:</p>
+        <ul>
+            <li data-key="s6_l1">Your friends can see your name and whether you are currently in a "Focused" session</li>
+            <li data-key="s6_l2">No session content, goals, notes, or personal data are shared with friends</li>
+            <li data-key="s6_l3">Friend connections require mutual approval — no one can follow you without your consent</li>
+            <li data-key="s6_l4">You can remove friends at any time from within the app</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 data-key="s7_title">7. Data Retention & Deletion</h2>
+        <p data-key="s7_p1">You have full control over your data:</p>
+        <ul>
+            <li data-key="s7_l1">You may delete your account at any time from the app (Profile → Delete Account)</li>
+            <li data-key="s7_l2">Upon account deletion, your email and all associated Firebase data are permanently deleted</li>
+            <li data-key="s7_l3">Local data (name, photo) is removed when you uninstall the app</li>
+            <li data-key="s7_l4">RevenueCat subscription records may be retained as required by applicable law</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 data-key="s8_title">8. Children's Privacy (COPPA)</h2>
+        <p data-key="s8_p1">SynapseAI is intended for users aged <strong>13 and older</strong>. I do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child under 13 has provided personal information, please contact me immediately at <a href="mailto:privacy@synapseai.app">privacy@synapseai.app</a> and I will delete such information promptly.</p>
+        <p data-key="s8_p2">Users between 13 and 16 in the European Union may require parental consent in accordance with GDPR regulations.</p>
+    </div>
+
+    <div class="section">
+        <h2 data-key="s9_title">9. Your Rights (GDPR & CCPA)</h2>
+        <p data-key="s9_intro">Depending on your location, you may have the following rights regarding your personal data:</p>
+        <ul>
+            <li data-key="s9_l1"><strong>Right of access</strong> — Request a copy of the data I hold about you</li>
+            <li data-key="s9_l2"><strong>Right to rectification</strong> — Request correction of inaccurate data</li>
+            <li data-key="s9_l3"><strong>Right to erasure</strong> — Request deletion of your personal data</li>
+            <li data-key="s9_l4"><strong>Right to object</strong> — Object to processing of your data for certain purposes</li>
+            <li data-key="s9_l5"><strong>Right to data portability</strong> — Request your data in a portable format</li>
+        </ul>
+        <p data-key="s9_p2">To exercise any of these rights, contact me at <a href="mailto:privacy@synapseai.app">privacy@synapseai.app</a>. I will respond within 30 days.</p>
+    </div>
+
+    <div class="section">
+        <h2 data-key="s10_title">10. Data Security & International Transfer</h2>
+        <p data-key="s10_p1">I implement industry-standard security measures to protect your data. Firebase provides encrypted data transmission (TLS) and secure storage. However, no method of transmission over the internet is 100% secure, and I cannot guarantee absolute security.</p>
+        <p data-key="s10_p2">Your data may be transferred to, processed, and stored on secure servers located in the United States or other countries where our third-party service providers operate. By using the app, you consent to this transfer.</p>
+    </div>
+
+    <div class="section">
+        <h2 data-key="s11_title">11. Changes to This Policy</h2>
+        <p data-key="s11_p1">I may update this Privacy Policy from time to time. When I do, I will update the "Last updated" date at the top of this page. For significant changes, I will notify you through the app or via email. Your continued use of SynapseAI after changes constitutes acceptance of the updated policy.</p>
+    </div>
+
+    <div class="section">
+        <h2 data-key="s12_title">12. Contact</h2>
+        <p data-key="s12_p1">If you have any questions, concerns, or requests regarding this Privacy Policy or your personal data, please contact:</p>
+        <div class="highlight-box">
+            <p><strong>Sami Gündoğan</strong><br>
+            <span data-key="s12_dev">Independent Developer — SynapseAI</span><br>
+            <a href="mailto:privacy@synapseai.app">privacy@synapseai.app</a></p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>© 2026 SynapseAI · Sami Gündoğan · <a href="privacy-policy.html" data-key="nav_privacy">Privacy Policy</a> · <a href="terms-of-use.html" data-key="nav_terms">Terms of Use</a> · <a href="support.html" data-key="nav_support">Support</a></p>
+</footer>
+
+<script>
+const translations = {
+    en: {
+        tag: "Legal",
+        title: "Privacy Policy",
+        updated: "Last updated: February 24, 2026",
+        nav_privacy: "Privacy Policy",
+        nav_terms: "Terms of Use",
+        nav_support: "Support",
+        s1_title: "1. Introduction",
+        s1_p1: "Welcome to <strong>SynapseAI</strong>, an AI-powered education coach and mentor app designed to help students, professionals, and anyone who wants to build consistent habits in daily life. This Privacy Policy explains how Sami Gündoğan (\"I\", \"me\", or \"Developer\") collects, uses, and protects your personal information when you use the SynapseAI mobile application.",
+        s1_p2: "By using SynapseAI, you agree to the collection and use of information in accordance with this policy. I am committed to protecting your privacy and handling your data transparently and responsibly.",
+        s2_title: "2. Information I Collect",
+        s2_intro: "I collect the minimum amount of data necessary to provide you with a great experience:",
+        s2_l1: "<strong>Email address</strong> — collected during account registration, stored securely on Firebase servers.",
+        s2_l2: "<strong>Display name</strong> — optionally provided by you, stored only on your device (not uploaded to any server).",
+        s2_l3: "<strong>Profile photo</strong> — optionally provided by you, stored only on your device (not uploaded to any server).",
+        s2_l4: "<strong>Focus status</strong> — when you start a focus session, your \"Focused\" status becomes visible to your approved friends within the app. No session content, duration, or details are shared.",
+        s2_l5: "<strong>Usage data</strong> — anonymized analytics to improve app performance, collected via Firebase Analytics.",
+        s2_l6: "<strong>Device Permissions</strong> — We may request access to your photo library/camera (strictly to let you choose a profile photo, which stays on your device) and push notifications (to send focus reminders and app updates). You can revoke these at any time in your device settings.",
+        s2_note: "⚡ Your name and profile photo never leave your device. They are stored locally using iOS UserDefaults and are not transmitted to our servers.",
+        s3_title: "3. AI & Data Processing",
+        s3_p1: "As an AI-powered application, SynapseAI utilizes third-party artificial intelligence services to provide personalized coaching and mentoring. The text prompts, goals, and interactions you have with the AI within the app are sent to these services solely for the purpose of generating responses.",
+        s3_note: "🔒 <strong>Privacy First:</strong> Your personal data, interactions, and prompts are <strong>not</strong> used to train our AI models or the foundational models of our third-party AI providers.",
+        s4_title: "4. How I Use Your Information",
+        s4_intro: "Your information is used solely to:",
+        s4_l1: "Create and manage your SynapseAI account",
+        s4_l2: "Enable social features (Crew/friend system) — only your focus status is visible to friends",
+        s4_l3: "Process subscription payments via RevenueCat",
+        s4_l4: "Display relevant advertisements via Google AdMob (for free-tier users)",
+        s4_l5: "Improve app performance and fix issues through analytics",
+        s4_l6: "Send important notifications about your account or subscription",
+        s4_p2: "I do <strong>not</strong> sell, rent, or trade your personal information to third parties for marketing purposes.",
+        s5_title: "5. Third-Party Services",
+        s5_intro: "SynapseAI uses the following third-party services, each with their own privacy policies:",
+        s5_l1: "<strong>Firebase (Google)</strong> — Authentication, database, and analytics. <a href=\"https://firebase.google.com/support/privacy\" target=\"_blank\">Privacy Policy →</a>",
+        s5_l2: "<strong>OpenAI</strong> — Artificial Intelligence API for coaching features. <a href=\"https://openai.com/policies/privacy-policy\" target=\"_blank\">Privacy Policy →</a>",
+        s5_l3: "<strong>RevenueCat</strong> — Subscription management and in-app purchases. <a href=\"https://www.revenuecat.com/privacy\" target=\"_blank\">Privacy Policy →</a>",
+        s5_l4: "<strong>Google AdMob</strong> — Advertising for free-tier users. AdMob may collect device identifiers and usage data to serve personalized ads. <a href=\"https://policies.google.com/privacy\" target=\"_blank\">Privacy Policy →</a>",
+        s5_note: "Premium subscribers do not see advertisements. AdMob data collection applies only to free-tier users.",
+        s6_title: "6. Social Features & Friend System",
+        s6_p1: "SynapseAI includes a \"Crew\" (friend) feature that allows you to connect with other users. Here is exactly what is and is not shared:",
+        s6_l1: "Your friends can see your name and whether you are currently in a \"Focused\" session",
+        s6_l2: "No session content, goals, notes, or personal data are shared with friends",
+        s6_l3: "Friend connections require mutual approval — no one can follow you without your consent",
+        s6_l4: "You can remove friends at any time from within the app",
+        s7_title: "7. Data Retention & Deletion",
+        s7_p1: "You have full control over your data:",
+        s7_l1: "You may delete your account at any time from the app (Profile → Delete Account)",
+        s7_l2: "Upon account deletion, your email and all associated Firebase data are permanently deleted",
+        s7_l3: "Local data (name, photo) is removed when you uninstall the app",
+        s7_l4: "RevenueCat subscription records may be retained as required by applicable law",
+        s8_title: "8. Children's Privacy (COPPA)",
+        s8_p1: "SynapseAI is intended for users aged <strong>13 and older</strong>. I do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child under 13 has provided personal information, please contact me immediately at <a href=\"mailto:privacy@synapseai.app\">privacy@synapseai.app</a> and I will delete such information promptly.",
+        s8_p2: "Users between 13 and 16 in the European Union may require parental consent in accordance with GDPR regulations.",
+        s9_title: "9. Your Rights (GDPR & CCPA)",
+        s9_intro: "Depending on your location, you may have the following rights regarding your personal data:",
+        s9_l1: "<strong>Right of access</strong> — Request a copy of the data I hold about you",
+        s9_l2: "<strong>Right to rectification</strong> — Request correction of inaccurate data",
+        s9_l3: "<strong>Right to erasure</strong> — Request deletion of your personal data",
+        s9_l4: "<strong>Right to object</strong> — Object to processing of your data for certain purposes",
+        s9_l5: "<strong>Right to data portability</strong> — Request your data in a portable format",
+        s9_p2: "To exercise any of these rights, contact me at <a href=\"mailto:privacy@synapseai.app\">privacy@synapseai.app</a>. I will respond within 30 days.",
+        s10_title: "10. Data Security & International Transfer",
+        s10_p1: "I implement industry-standard security measures to protect your data. Firebase provides encrypted data transmission (TLS) and secure storage. However, no method of transmission over the internet is 100% secure, and I cannot guarantee absolute security.",
+        s10_p2: "Your data may be transferred to, processed, and stored on secure servers located in the United States or other countries where our third-party service providers operate. By using the app, you consent to this transfer.",
+        s11_title: "11. Changes to This Policy",
+        s11_p1: "I may update this Privacy Policy from time to time. When I do, I will update the \"Last updated\" date at the top of this page. For significant changes, I will notify you through the app or via email. Your continued use of SynapseAI after changes constitutes acceptance of the updated policy.",
+        s12_title: "12. Contact",
+        s12_p1: "If you have any questions, concerns, or requests regarding this Privacy Policy or your personal data, please contact:",
+        s12_dev: "Independent Developer — SynapseAI",
+    },
+    tr: {
+        tag: "Yasal",
+        title: "Gizlilik Politikası",
+        updated: "Son güncelleme: 24 Şubat 2026",
+        nav_privacy: "Gizlilik Politikası",
+        nav_terms: "Kullanım Koşulları",
+        nav_support: "Destek",
+        s1_title: "1. Giriş",
+        s1_p1: "<strong>SynapseAI</strong>'ya hoş geldiniz. SynapseAI; öğrencilere, profesyonellere ve günlük yaşamında düzenli alışkanlıklar edinmek isteyen herkese yönelik yapay zeka destekli bir eğitim koçu ve mentor uygulamasıdır. Bu Gizlilik Politikası, Sami Gündoğan (\"Ben\" veya \"Geliştirici\") olarak SynapseAI mobil uygulamasını kullandığınızda kişisel bilgilerinizi nasıl topladığımı, kullandığımı ve koruduğumu açıklamaktadır.",
+        s1_p2: "SynapseAI'yı kullanarak, bu politikaya uygun olarak bilgilerin toplanmasını ve kullanılmasını kabul etmiş olursunuz. Gizliliğinizi korumaya ve verilerinizi şeffaf ve sorumlu bir şekilde yönetmeye kararlıyım.",
+        s2_title: "2. Topladığım Bilgiler",
+        s2_intro: "Size harika bir deneyim sunmak için gereken minimum miktarda veri topluyorum:",
+        s2_l1: "<strong>E-posta adresi</strong> — Hesap kaydı sırasında toplanır, Firebase sunucularında güvenli şekilde saklanır.",
+        s2_l2: "<strong>Görünen ad</strong> — İsteğe bağlı olarak siz sağlarsınız, yalnızca cihazınızda saklanır (hiçbir sunucuya yüklenmez).",
+        s2_l3: "<strong>Profil fotoğrafı</strong> — İsteğe bağlı olarak siz sağlarsınız, yalnızca cihazınızda saklanır (hiçbir sunucuya yüklenmez).",
+        s2_l4: "<strong>Odaklanma durumu</strong> — Bir odaklanma oturumu başlattığınızda, \"Odaklanıyor\" durumunuz uygulama içinde onaylı arkadaşlarınıza görünür hale gelir. Oturum içeriği, süresi veya ayrıntıları paylaşılmaz.",
+        s2_l5: "<strong>Kullanım verileri</strong> — Uygulama performansını iyileştirmek için Firebase Analytics aracılığıyla toplanan anonimleştirilmiş analitik veriler.",
+        s2_l6: "<strong>Cihaz İzinleri</strong> — Fotoğraf galerinize/kameranıza (yalnızca cihazınızda kalan bir profil fotoğrafı seçmenize izin vermek için) ve anlık bildirimlere (odaklanma hatırlatıcıları ve güncellemeler göndermek için) erişim talep edebiliriz. Bunları istediğiniz zaman cihaz ayarlarınızdan iptal edebilirsiniz.",
+        s2_note: "⚡ Adınız ve profil fotoğrafınız hiçbir zaman cihazınızdan çıkmaz. iOS UserDefaults kullanılarak yerel olarak saklanır ve sunucularımıza iletilmez.",
+        s3_title: "3. Yapay Zeka ve Veri İşleme",
+        s3_p1: "Yapay zeka destekli bir uygulama olan SynapseAI, kişiselleştirilmiş koçluk ve mentorluk sağlamak için üçüncü taraf yapay zeka hizmetlerini kullanır. Uygulama içinde yapay zeka ile olan metin istemleriniz, hedefleriniz ve etkileşimleriniz yalnızca yanıt üretmek amacıyla bu hizmetlere gönderilir.",
+        s3_note: "🔒 <strong>Önce Gizlilik:</strong> Kişisel verileriniz, etkileşimleriniz ve girdileriniz (prompts), bizim veya üçüncü taraf yapay zeka sağlayıcılarımızın yapay zeka modellerini eğitmek için <strong>kullanılmaz</strong>.",
+        s4_title: "4. Bilgilerinizi Nasıl Kullanıyorum",
+        s4_intro: "Bilgileriniz yalnızca şu amaçlarla kullanılır:",
+        s4_l1: "SynapseAI hesabınızı oluşturmak ve yönetmek",
+        s4_l2: "Sosyal özellikleri etkinleştirmek (Tayfa/arkadaş sistemi) — yalnızca odaklanma durumunuz arkadaşlarınıza görünür",
+        s4_l3: "RevenueCat aracılığıyla abonelik ödemelerini işlemek",
+        s4_l4: "Google AdMob aracılığıyla ilgili reklamları göstermek (ücretsiz kullanıcılar için)",
+        s4_l5: "Analitik yoluyla uygulama performansını iyileştirmek ve sorunları gidermek",
+        s4_l6: "Hesabınız veya aboneliğinizle ilgili önemli bildirimleri göndermek",
+        s4_p2: "Kişisel bilgilerinizi pazarlama amacıyla üçüncü taraflara <strong>satmıyor</strong>, kiralamıyor veya takas etmiyorum.",
+        s5_title: "5. Üçüncü Taraf Hizmetler",
+        s5_intro: "SynapseAI, her birinin kendi gizlilik politikasına sahip olan aşağıdaki üçüncü taraf hizmetleri kullanmaktadır:",
+        s5_l1: "<strong>Firebase (Google)</strong> — Kimlik doğrulama, veritabanı ve analitik. <a href=\"https://firebase.google.com/support/privacy\" target=\"_blank\">Gizlilik Politikası →</a>",
+        s5_l2: "<strong>OpenAI</strong> — Koçluk özellikleri için Yapay Zeka API'si. <a href=\"https://openai.com/policies/privacy-policy\" target=\"_blank\">Gizlilik Politikası →</a>",
+        s5_l3: "<strong>RevenueCat</strong> — Abonelik yönetimi ve uygulama içi satın almalar. <a href=\"https://www.revenuecat.com/privacy\" target=\"_blank\">Gizlilik Politikası →</a>",
+        s5_l4: "<strong>Google AdMob</strong> — Ücretsiz kullanıcılar için reklamcılık. AdMob, kişiselleştirilmiş reklamlar sunmak için cihaz tanımlayıcıları ve kullanım verileri toplayabilir. <a href=\"https://policies.google.com/privacy\" target=\"_blank\">Gizlilik Politikası →</a>",
+        s5_note: "Premium aboneler reklam görmez. AdMob veri toplama yalnızca ücretsiz kullanıcılar için geçerlidir.",
+        s6_title: "6. Sosyal Özellikler ve Arkadaş Sistemi",
+        s6_p1: "SynapseAI, diğer kullanıcılarla bağlantı kurmanıza olanak tanıyan bir \"Tayfa\" (arkadaş) özelliği içermektedir. Paylaşılan ve paylaşılmayan bilgiler tam olarak şunlardır:",
+        s6_l1: "Arkadaşlarınız adınızı ve şu anda \"Odaklanıyor\" oturumunda olup olmadığınızı görebilir",
+        s6_l2: "Hiçbir oturum içeriği, hedef, not veya kişisel veri arkadaşlarla paylaşılmaz",
+        s6_l3: "Arkadaşlık bağlantıları karşılıklı onay gerektirir — sizi izinsiz kimse takip edemez",
+        s6_l4: "Uygulama içinden istediğiniz zaman arkadaşları kaldırabilirsiniz",
+        s7_title: "7. Veri Saklama ve Silme",
+        s7_p1: "Verileriniz üzerinde tam kontrole sahipsiniz:",
+        s7_l1: "Hesabınızı istediğiniz zaman uygulamadan silebilirsiniz (Profil → Hesabı Sil)",
+        s7_l2: "Hesap silindiğinde, e-postanız ve ilgili tüm Firebase verileri kalıcı olarak silinir",
+        s7_l3: "Yerel veriler (ad, fotoğraf) uygulamayı kaldırdığınızda silinir",
+        s7_l4: "RevenueCat abonelik kayıtları yürürlükteki mevzuatın gerektirdiği şekilde saklanabilir",
+        s8_title: "8. Çocukların Gizliliği (COPPA)",
+        s8_p1: "SynapseAI, <strong>13 yaş ve üzeri</strong> kullanıcılar için tasarlanmıştır. 13 yaşın altındaki çocuklardan bilerek kişisel bilgi toplamıyorum. Eğer bir ebeveyn veya vasi olarak 13 yaşından küçük çocuğunuzun kişisel bilgi sağladığına inanıyorsanız, lütfen hemen <a href=\"mailto:privacy@synapseai.app\">privacy@synapseai.app</a> adresinden benimle iletişime geçin; söz konusu bilgileri derhal sileceğim.",
+        s8_p2: "Avrupa Birliği'nde 13-16 yaş arasındaki kullanıcılar, GDPR düzenlemeleri uyarınca ebeveyn onayı gerektirebilir.",
+        s9_title: "9. Haklarınız (GDPR ve CCPA)",
+        s9_intro: "Bulunduğunuz konuma bağlı olarak kişisel verilerinizle ilgili aşağıdaki haklara sahip olabilirsiniz:",
+        s9_l1: "<strong>Erişim hakkı</strong> — Hakkınızda tuttuğum verilerin bir kopyasını talep edebilirsiniz",
+        s9_l2: "<strong>Düzeltme hakkı</strong> — Yanlış verilerin düzeltilmesini talep edebilirsiniz",
+        s9_l3: "<strong>Silme hakkı</strong> — Kişisel verilerinizin silinmesini talep edebilirsiniz",
+        s9_l4: "<strong>İtiraz hakkı</strong> — Belirli amaçlarla verilerinizin işlenmesine itiraz edebilirsiniz",
+        s9_l5: "<strong>Veri taşınabilirliği hakkı</strong> — Verilerinizi taşınabilir bir formatta talep edebilirsiniz",
+        s9_p2: "Bu haklardan herhangi birini kullanmak için <a href=\"mailto:privacy@synapseai.app\">privacy@synapseai.app</a> adresinden benimle iletişime geçin. 30 gün içinde yanıt vereceğim.",
+        s10_title: "10. Veri Güvenliği ve Uluslararası Transfer",
+        s10_p1: "Verilerinizi korumak için endüstri standardı güvenlik önlemleri uyguluyorum. Firebase, şifreli veri iletimi (TLS) ve güvenli depolama sağlar. Ancak internet üzerinden hiçbir iletim yöntemi %100 güvenli değildir ve mutlak güvenliği garanti edemem.",
+        s10_p2: "Verileriniz, Amerika Birleşik Devletleri'nde veya üçüncü taraf hizmet sağlayıcılarımızın faaliyet gösterdiği diğer ülkelerdeki güvenli sunuculara aktarılabilir, orada işlenebilir ve saklanabilir. Uygulamayı kullanarak bu aktarımı kabul etmiş olursunuz.",
+        s11_title: "11. Bu Politikadaki Değişiklikler",
+        s11_p1: "Bu Gizlilik Politikasını zaman zaman güncelleyebilirim. Güncellediğimde, bu sayfanın üst kısmındaki \"Son güncelleme\" tarihini değiştireceğim. Önemli değişiklikler için uygulama aracılığıyla veya e-posta ile sizi bilgilendireceğim. Değişikliklerden sonra SynapseAI'yı kullanmaya devam etmeniz güncellenmiş politikayı kabul ettiğiniz anlamına gelir.",
+        s12_title: "12. İletişim",
+        s12_p1: "Bu Gizlilik Politikası veya kişisel verilerinizle ilgili herhangi bir sorunuz, endişeniz veya talebiniz varsa lütfen iletişime geçin:",
+        s12_dev: "Bağımsız Geliştirici — SynapseAI",
+    },
+    es: {
+        tag: "Legal",
+        title: "Política de Privacidad",
+        updated: "Última actualización: 24 de febrero de 2026",
+        nav_privacy: "Política de Privacidad",
+        nav_terms: "Términos de Uso",
+        nav_support: "Soporte",
+        s1_title: "1. Introducción",
+        s1_p1: "Bienvenido a <strong>SynapseAI</strong>, una aplicación de coaching y mentoría educativa con IA diseñada para ayudar a estudiantes, profesionales y a cualquier persona que desee crear hábitos consistentes en la vida diaria. Esta Política de Privacidad explica cómo Sami Gündoğan (\"yo\" o \"Desarrollador\") recopila, usa y protege su información personal cuando utiliza la aplicación móvil SynapseAI.",
+        s1_p2: "Al usar SynapseAI, usted acepta la recopilación y el uso de información de acuerdo con esta política. Estoy comprometido a proteger su privacidad y manejar sus datos de manera transparente y responsable.",
+        s2_title: "2. Información que Recopilo",
+        s2_intro: "Recopilo la cantidad mínima de datos necesaria para brindarle una excelente experiencia:",
+        s2_l1: "<strong>Dirección de correo electrónico</strong> — recopilada durante el registro de la cuenta, almacenada de forma segura en los servidores de Firebase.",
+        s2_l2: "<strong>Nombre de visualización</strong> — proporcionado opcionalmente por usted, almacenado solo en su dispositivo (no se carga en ningún servidor).",
+        s2_l3: "<strong>Foto de perfil</strong> — proporcionada opcionalmente por usted, almacenada solo en su dispositivo (no se carga en ningún servidor).",
+        s2_l4: "<strong>Estado de enfoque</strong> — cuando inicia una sesión de enfoque, su estado \"Enfocado\" se vuelve visible para sus amigos aprobados dentro de la aplicación. No se comparte el contenido, la duración ni los detalles de la sesión.",
+        s2_l5: "<strong>Datos de uso</strong> — análisis anonimizados para mejorar el rendimiento de la aplicación, recopilados a través de Firebase Analytics.",
+        s2_l6: "<strong>Permisos del Dispositivo</strong> — Podemos solicitar acceso a su galería de fotos/cámara (estrictamente para permitirle elegir una foto de perfil, que permanece en su dispositivo) y notificaciones (para enviar recordatorios de enfoque y actualizaciones). Puede revocarlos en cualquier momento en la configuración de su dispositivo.",
+        s2_note: "⚡ Su nombre y foto de perfil nunca salen de su dispositivo. Se almacenan localmente usando iOS UserDefaults y no se transmiten a nuestros servidores.",
+        s3_title: "3. IA y Procesamiento de Datos",
+        s3_p1: "Como aplicación impulsada por IA, SynapseAI utiliza servicios de inteligencia artificial de terceros para proporcionar coaching y mentoría personalizados. Las indicaciones de texto, los objetivos y las interacciones que tiene con la IA dentro de la aplicación se envían a estos servicios únicamente con el fin de generar respuestas.",
+        s3_note: "🔒 <strong>Privacidad Primero:</strong> Sus datos personales, interacciones e indicaciones <strong>no</strong> se utilizan para entrenar nuestros modelos de IA ni los modelos fundamentales de nuestros proveedores de IA de terceros.",
+        s4_title: "4. Cómo Uso su Información",
+        s4_intro: "Su información se usa únicamente para:",
+        s4_l1: "Crear y gestionar su cuenta de SynapseAI",
+        s4_l2: "Habilitar funciones sociales (sistema de Crew/amigos) — solo su estado de enfoque es visible para los amigos",
+        s4_l3: "Procesar pagos de suscripción a través de RevenueCat",
+        s4_l4: "Mostrar publicidad relevante a través de Google AdMob (para usuarios gratuitos)",
+        s4_l5: "Mejorar el rendimiento de la aplicación y solucionar problemas mediante análisis",
+        s4_l6: "Enviar notificaciones importantes sobre su cuenta o suscripción",
+        s4_p2: "No vendo, arriendo ni intercambio su información personal con terceros con fines de marketing.",
+        s5_title: "5. Servicios de Terceros",
+        s5_intro: "SynapseAI utiliza los siguientes servicios de terceros, cada uno con sus propias políticas de privacidad:",
+        s5_l1: "<strong>Firebase (Google)</strong> — Autenticación, base de datos y análisis. <a href=\"https://firebase.google.com/support/privacy\" target=\"_blank\">Política de Privacidad →</a>",
+        s5_l2: "<strong>OpenAI</strong> — API de Inteligencia Artificial para funciones de coaching. <a href=\"https://openai.com/policies/privacy-policy\" target=\"_blank\">Política de Privacidad →</a>",
+        s5_l3: "<strong>RevenueCat</strong> — Gestión de suscripciones y compras dentro de la aplicación. <a href=\"https://www.revenuecat.com/privacy\" target=\"_blank\">Política de Privacidad →</a>",
+        s5_l4: "<strong>Google AdMob</strong> — Publicidad para usuarios gratuitos. AdMob puede recopilar identificadores de dispositivos y datos de uso para mostrar anuncios personalizados. <a href=\"https://policies.google.com/privacy\" target=\"_blank\">Política de Privacidad →</a>",
+        s5_note: "Los suscriptores premium no ven publicidad. La recopilación de datos de AdMob solo aplica a usuarios gratuitos.",
+        s6_title: "6. Funciones Sociales y Sistema de Amigos",
+        s6_p1: "SynapseAI incluye una función \"Crew\" (amigos) que le permite conectarse con otros usuarios. Esto es exactamente lo que se comparte y lo que no:",
+        s6_l1: "Sus amigos pueden ver su nombre y si actualmente está en una sesión \"Enfocado\"",
+        s6_l2: "No se comparte ningún contenido de sesión, objetivos, notas ni datos personales con los amigos",
+        s6_l3: "Las conexiones de amistad requieren aprobación mutua — nadie puede seguirle sin su consentimiento",
+        s6_l4: "Puede eliminar amigos en cualquier momento desde la aplicación",
+        s7_title: "7. Retención y Eliminación de Datos",
+        s7_p1: "Usted tiene control total sobre sus datos:",
+        s7_l1: "Puede eliminar su cuenta en cualquier momento desde la aplicación (Perfil → Eliminar cuenta)",
+        s7_l2: "Al eliminar la cuenta, su correo electrónico y todos los datos de Firebase asociados se eliminan permanentemente",
+        s7_l3: "Los datos locales (nombre, foto) se eliminan cuando desinstala la aplicación",
+        s7_l4: "Los registros de suscripción de RevenueCat pueden conservarse según lo exija la ley aplicable",
+        s8_title: "8. Privacidad de los Menores (COPPA)",
+        s8_p1: "SynapseAI está destinado a usuarios de <strong>13 años o más</strong>. No recopilo intencionalmente información personal de menores de 13 años. Si usted es padre, madre o tutor y cree que su hijo menor de 13 años ha proporcionado información personal, contácteme inmediatamente en <a href=\"mailto:privacy@synapseai.app\">privacy@synapseai.app</a> y eliminaré dicha información de inmediato.",
+        s8_p2: "Los usuarios de entre 13 y 16 años en la Unión Europea pueden requerir el consentimiento de los padres de acuerdo con las regulaciones del RGPD.",
+        s9_title: "9. Sus Derechos (RGPD y CCPA)",
+        s9_intro: "Dependiendo de su ubicación, puede tener los siguientes derechos sobre sus datos personales:",
+        s9_l1: "<strong>Derecho de acceso</strong> — Solicitar una copia de los datos que tengo sobre usted",
+        s9_l2: "<strong>Derecho de rectificación</strong> — Solicitar la corrección de datos inexactos",
+        s9_l3: "<strong>Derecho de supresión</strong> — Solicitar la eliminación de sus datos personales",
+        s9_l4: "<strong>Derecho de oposición</strong> — Oponerse al tratamiento de sus datos para determinados fines",
+        s9_l5: "<strong>Derecho a la portabilidad</strong> — Solicitar sus datos en un formato portable",
+        s9_p2: "Para ejercer cualquiera de estos derechos, contácteme en <a href=\"mailto:privacy@synapseai.app\">privacy@synapseai.app</a>. Responderé en un plazo de 30 días.",
+        s10_title: "10. Seguridad de Datos y Transferencia Internacional",
+        s10_p1: "Implemento medidas de seguridad estándar de la industria para proteger sus datos. Firebase proporciona transmisión de datos cifrada (TLS) y almacenamiento seguro. Sin embargo, ningún método de transmisión por Internet es 100% seguro y no puedo garantizar una seguridad absoluta.",
+        s10_p2: "Sus datos pueden ser transferidos, procesados y almacenados en servidores seguros ubicados en los Estados Unidos u otros países donde operan nuestros proveedores de servicios externos. Al usar la aplicación, usted acepta esta transferencia.",
+        s11_title: "11. Cambios en Esta Política",
+        s11_p1: "Puedo actualizar esta Política de Privacidad de vez en cuando. Cuando lo haga, actualizaré la fecha de \"Última actualización\" en la parte superior de esta página. Para cambios significativos, le notificaré a través de la aplicación o por correo electrónico. Su uso continuado de SynapseAI después de los cambios constituye la aceptación de la política actualizada.",
+        s12_title: "12. Contacto",
+        s12_p1: "Si tiene alguna pregunta, inquietud o solicitud sobre esta Política de Privacidad o sus datos personales, contácteme:",
+        s12_dev: "Desarrollador Independiente — SynapseAI",
+    }
+};
+
+let currentLang = 'en';
+
+function setLang(lang) {
+    currentLang = lang;
+    const t = translations[lang];
+
+    document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+    });
+
+    document.documentElement.lang = lang;
+}
+
+// Auto-detect browser language
+const browserLang = navigator.language.slice(0, 2);
+if (['tr', 'es'].includes(browserLang)) setLang(browserLang);
+</script>
+
+</body>
+</html>
